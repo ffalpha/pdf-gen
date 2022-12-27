@@ -67,7 +67,7 @@ app.get('/course/:id', (req, res) => {
                             const headerTemplate = `<span style="font-size: 30px; width: 200px; height: 200px; background-color: black; color: white; margin: 20px;">Header</span>`;
                             const content = await compile('index', data);
                             await page.setContent(content);
-                            await page.addStyleTag({ path: './template/index.css' })
+                            await page.addStyleTag({ path: 'index.css' })
                             await page.emulateMediaType('print');
                             await page.pdf({
 

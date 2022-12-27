@@ -112,7 +112,7 @@ app.get('/course/:id', (req, res) => {
 
                             console.log('done');
                             await browser.close();
-                            process.exit();
+                           // process.exit();
                             res.status(200).send("Message:PDF genrated");
 
 

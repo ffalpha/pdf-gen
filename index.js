@@ -112,7 +112,7 @@ app.get('/course/:id', (req, res) => {
 
                             console.log('done');
                             await browser.close();
-                            //  res.status(200).send("Message:PDF genrated");
+                            res.status(200).send("Message:PDF genrated");
                            // return;
                         // process.exit();
 
@@ -136,12 +136,12 @@ app.get('/course/:id', (req, res) => {
             console.log(error);
         }
     })();
-    setTimeout(() => {
-        const file = `./pdfs/${varaible}.pdf`;
-        res.status(200).download(file);
+    // setTimeout(() => {
+    //     const file = `./pdfs/${varaible}.pdf`;
+    //     res.status(200).download(file);
         
-        console.log("File send");
-    }, 8000);
+    //     console.log("File send");
+    // }, 8000);
 })
 
 app.get('/courseget/:id', (req, res) => {

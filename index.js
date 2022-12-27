@@ -8,10 +8,12 @@ const app = require('express')();
 const PORT =  8081;
 global.appRoot = path.resolve(__dirname);
 
-app.listen(
-    PORT, () => console.log(`it is alive ${PORT}`))
+app.listen(PORT, () => console.log(`it is alive ${PORT}`));
 
-
+app.get('/hello',(req,res)=>{
+    console.log("Hit here");
+  res.send("Hello");
+});
 app.get('/course/:id', (req, res) => {
     console.log("hit");
     var varaible = req.params['id'];

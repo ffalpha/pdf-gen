@@ -3,6 +3,7 @@ const puppeteer = require('puppeteer');
 const fs = require('fs-extra');
 const axios = require('axios');
 const hbs = require('handlebars');
+const fsExtra = require('fs-extra');
 const path = require('path');
 const app = require('express')();
 const PORT = process.env.PORT || 8080;
@@ -97,19 +98,7 @@ app.get('/course/:id', (req, res) => {
                             }).then(() => {
                                 const file = `./pdfs/${varaible}.pdf`;
                                 res.status(200).download(file);
-                            }).then(()=>{
-                                fs.unlink(`./pdfs/${varaible}.pdf`, function (err) {
-                                    if (err && err.code == 'ENOENT') {
-                                        // file doens't exist
-                                        console.info("File doesn't exist, won't remove it.");
-                                    } else if (err) {
-                                        // other errors, e.g. maybe we don't have enough permission
-                                        console.error("Error occurred while trying to remove file");
-                                    } else {
-                                        console.info(`removed pdf`);
-                                    }
-                                });
-                            });
+                            })
                             fs.unlink('./cd.json', function (err) {
                                 if (err && err.code == 'ENOENT') {
                                     // file doens't exist
@@ -146,10 +135,10 @@ app.get('/course/:id', (req, res) => {
     })();
 })
 
-app.get('/courseget/:id', (req, res) => {
-    var varaible = req.params['id'];
-    const file = `./pdfs/${varaible}.pdf`;
-    res.status(200).download(file);
+app.get('/clear/', (req, res) => {
+    fsExtra.emptyDirSync("./pdfs/");
+    res.status(200).send("Cleared");
+   
 })
 
 function base64Encode(file) {

@@ -8,7 +8,7 @@ const axios = require('axios');
 const hbs = require('handlebars');
 const path = require('path');
 const app = require('express')();
-const PORT = 8081;
+const PORT = process.env.PORT || 8082;
 global.appRoot = path.resolve(__dirname);
 
 
@@ -18,14 +18,14 @@ app.listen(
 
 
 app.get('/course/:id', (req, res) => {
-  console.log("hit");
+    console.log("hit");
 
     var varaible = req.params['id'];
     console.log(varaible);
 
     const url =
         "https://academy-staging.abundent.com/v1/courses/" + varaible + "/public";
-        console.log(url);
+    console.log(url);
     const config = {
         headers: {
             "Content-Type": "application/json",
@@ -49,6 +49,7 @@ app.get('/course/:id', (req, res) => {
 
     var data = '';
     (async function () {
+
         try {
             await axios({
                 method: "get",
@@ -74,7 +75,7 @@ app.get('/course/:id', (req, res) => {
                                 path: `./pdfs/${varaible}.pdf`,
                                 format: 'A4',
                                 displayHeaderFooter: true,
-                                headerTemplate: '<header style="  border-bottom: 1px solid #000;  width:100%;font-size: 1.875em;">'
+                                headerTemplate: '<header style="  border-bottom: 1px solid #000;  width:100%">'
                                     + '<div style=" display: flex;flex-direction: row;flex-wrap: wrap; width: 100%;">'
                                     + ' <div style=" display: flex;flex-direction: column;flex-basis: 100%;  flex: 1;">'
                                     + '    <div  style=" color: rgb(50, 70, 247);font-size: 13px;padding-bottom: 1em;padding-left: 1em;">'
@@ -97,6 +98,9 @@ app.get('/course/:id', (req, res) => {
                                 }
 
 
+                            }).then(() => {
+                                const file = `./pdfs/${varaible}.pdf`;
+                                res.status(200).download(file);
                             });
                             fs.unlink('./cd.json', function (err) {
                                 if (err && err.code == 'ENOENT') {
@@ -111,13 +115,12 @@ app.get('/course/:id', (req, res) => {
                             });
 
                             console.log('done');
+
                             await browser.close();
-                           // process.exit();
-                          res.status(200).send("Message:PDF genrated");
+                            //process.exit();
 
 
                         } catch (error) {
-                            res.status(400).send(error);
                             console.log(error);
                         }
 
@@ -125,22 +128,14 @@ app.get('/course/:id', (req, res) => {
 
                 })
                 .catch(error => {
-                    res.status(400).send(error);
                     console.log(error);
                 });;
 
 
         } catch (error) {
-            res.status(400).send(error);
             console.log(error);
         }
     })();
-    // setTimeout(() => {
-    //     const file = `./pdfs/${varaible}.pdf`;
-    //     res.status(200).download(file);
-        
-    //     console.log("File send");
-    // }, 8000);
 })
 
 app.get('/courseget/:id', (req, res) => {

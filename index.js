@@ -155,7 +155,7 @@ function base64Encode(file) {
 }
 
 function logo() {
-    return '<img  width="90" height="70" src="data:image/png;base64,' + base64Encode(appRoot + "\\" + "logo.png") + '"/>';
+    return '<img  width="90" height="70" src="data:image/png;base64,' + base64Encode(appRoot + "//" + "logo.png") + '"/>';
 }
 
 var x = logo()

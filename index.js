@@ -8,7 +8,6 @@ const app = require('express')();
 const PORT = process.env.PORT || 8082;
 global.appRoot = path.resolve(__dirname);
 
-
 app.listen(
     PORT, () => console.log(`it is alive ${PORT}`))
 

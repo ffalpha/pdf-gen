@@ -6,9 +6,10 @@ const hbs = require('handlebars');
 const fsExtra = require('fs-extra');
 const path = require('path');
 const app = require('express')();
-const PORT = process.env.PORT || 300;
+const PORT = process.env.PORT || 200;
 global.appRoot = path.resolve(__dirname);
 global.breakCounter = 0;
+global.counter = 1000;
 
 
 app.get('/hello',(req,res)=>{
@@ -16,7 +17,12 @@ app.get('/hello',(req,res)=>{
   res.send("Hello");
 });
 app.get('/course/:id', (req, res) => {
-    console.log("hit");
+    if(counter == 1000){
+        res.status(200).send("Exsiting server.Maxium threshold reached");
+        process.exit();
+    }
+    counter++;
+    console.log(counter);
     var varaible = req.params['id'];
     console.log(varaible);
 

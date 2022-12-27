@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+</head>
+
+<body>
+    <div>
+        <h3>{{name}}</h1>
+
+            <div class="cs">
+                <table class="GeneratedTable">
+
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Name of Course/Module/Subject</td>
+                            <td colspan="2">{{name}}</td>
+
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Course /Subject Code</td>
+                            <td colspan="2">{{code}}</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td> Training specialization</td>
+                            <td colspan="2"></td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>Version</td>
+                            <td colspan="2"></td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>Prerequisite/Requirement for
+                                Registration</td>
+                            <td colspan="2">{{prerequisites}}</td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>Qualification</td>
+                            <td colspan="2">{{qualification}}</td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>Audiences</td>
+
+                            <td colspan="2">{{#each audiences as |a | }}<ul><li>{{a}}</li></ul>{{/each}}</td>
+
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td>Methodology</td>
+                            <td colspan="2">{{#each methodologies as |m | }}<ul><li>{{m}}</li></ul>{{/each}}</td>
+                        </tr>
+                        <tr>
+                            <td>9</td>
+                            <td>Person-in-Charge</td>
+                            <td colspan="2"></td>
+                        </tr>
+                        <tr>
+                            <td>10</td>
+                            <td>Trainer List</td>
+                            <td colspan="2">{{#each trainerNames as |t | }}{{t}},{{/each}}</td>
+                        </tr>
+                        <tr>
+                            <td>11</td>
+                            <td>Course Description </td>
+                            <td colspan="2" style="text-align: justify;">{{description}}</td>
+                        </tr>
+                        <tr>
+                            <td>12</td>
+                            <td>Course Summary</td>
+                            <td colspan="2"  style="text-align: justify;">{{summary}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>13</td>
+                            <td>Course Tagline</td>
+                            <td colspan="2"></td>
+                        </tr>
+                        <tr>
+                            <td>14</td>
+                            <td>Learning Objectives </td>
+                            <td colspan="2">
+                                <ul>{{#each objectives as |obj | }}<li>{{obj}}</li>{{/each}}</ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>15</td>
+                            <td>Course Detail</td>
+                            <td></td>
+                            <td>{{modulecount}} Modules</td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" style="  background: rgb(127, 240, 167); height: 40px; font-weight: bold;">
+                                {{durationStr}}</td>
+                        </tr>
+                        {{#each modules as |module | }}
+                        {{#switch module.title}}
+                        {{#case "Short Break"}} <tr style="background:#f2f532;">
+                             <div  hidden> {{counter}}</div> 
+                            <td></td>
+                            <td colspan="2" style="text-align: center;height:30px ; background:#f2f532;">
+                                <div>
+                                    {{module.title}}
+                                </div>
+                            </td>
+                            <td>{{module.duration}}</td>
+                        </tr> {{/case}}
+
+                            {{#case "Lunch"}} <tr style="background:hsl(285, 86%, 55%);">
+                             <div  hidden> {{counter}}</div> 
+                            <td></td>
+                            <td colspan="2" style="text-align: center;height:30px ; background:hsl(285, 86%, 55%); ">
+                                <div>
+                                    {{module.title}}
+                                </div>
+                            </td>
+                            <td>{{module.duration}}</td>
+                        </tr> {{/case}}
+                      
+                        {{#default '188'}}
+                        <tr>
+                            <td></td>
+                            <td colspan="2" style="  background: rgb(255, 255, 255); font-weight: 200 ;  padding-top: 10px;">
+                                <div>
+                                    Module {{sub @key }} - {{module.title}}
+                                    <ul>
+
+                                        {{#each module.contents}}
+                                           <li>
+                                          {{this}}
+                                        </li>
+                                       
+                                        {{/each}}
+                                      
+                                    </ul>
+                                </div>
+                            </td>
+                            <td>{{module.duration}}</td>
+                        </tr>
+                        {{/default}}
+                        {{/switch}}
+
+
+                        {{/each}}
+                        <tr>
+                            <td colspan="4" style="  height: 40px; font-weight: bold;"> End of the course
+                                QA</td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" style="  background: rgb(155, 160, 157); height: 40px; font-weight: bold;">
+                                Time Summary</td>
+                        </tr>
+                    
+                        <tr>
+                            <td> </td>
+                            <td style="width: 30%;">Total Hours of Course</td>
+                            <td style="width: 30%;">{{cousreHours}} hours</td>
+                            <td style="width: 30%;"></td>
+                        </tr>
+                        <tr>
+                            <td> </td>
+                            <td style="width: 30%;">Total Hour</td>
+                            <td style="width: 30%;">{{modulecount}} (modules) x 30 min = 150 min</td>
+                            <td style="width: 30%;"></td>
+                        </tr>
+                        <tr>
+                            <td> </td>
+                            <td style="width: 30%;">Total Consulting Days </td>
+                            <td style="width: 30%;">-</td>
+                            <td style="width: 30%;"></td>
+                        </tr>
+                        <tr>
+                            <td> </td>
+                            <td style="width: 30%;">Total Days</td>
+                            <td style="width: 30%;">{{tdays}}</td>
+                            <td style="width: 30%;"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+</body>
+
+
+</html>

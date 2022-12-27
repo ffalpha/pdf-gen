@@ -6,9 +6,9 @@ const hbs = require('handlebars');
 const fsExtra = require('fs-extra');
 const path = require('path');
 const app = require('express')();
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 300;
 global.appRoot = path.resolve(__dirname);
-
+global.breakCounter = 0;
 
 
 app.get('/hello',(req,res)=>{
@@ -55,8 +55,8 @@ app.get('/course/:id', (req, res) => {
             })
                 .then(response => {
 
-                    fs.writeFileSync('cd.json', JSON.stringify(response.data));
-                    data = require('./cd.json');
+                    fs.writeFileSync(`./${varaible}.json`, JSON.stringify(response.data));
+                    data = require(`./${varaible}.json`);
                     (async function () {
                         try {
 
@@ -96,7 +96,7 @@ app.get('/course/:id', (req, res) => {
 
 
                             }).then(() => {
-                                fs.unlink('./cd.json', function (err) {
+                                fs.unlink(`./${varaible}.json`, function (err) {
                                     if (err && err.code == 'ENOENT') {
                                         // file doens't exist
                                         console.info("File doesn't exist, won't remove it.");
@@ -110,8 +110,9 @@ app.get('/course/:id', (req, res) => {
 
                                 const file = `./pdfs/${varaible}.pdf`;
                                 res.status(200).download(file);
+                                breakCounter=0;
                             })
-                        
+                           
 
                             console.log('done');
 
@@ -152,7 +153,7 @@ function logo() {
 }
 
 var x = logo()
-breakCounter = 0;
+
 
 
 const compile = async function (temp, data) {
@@ -206,10 +207,6 @@ hbs.registerHelper("counter", function () {
 hbs.registerHelper("sub", function (index) {
     return index - breakCounter;
 });
-
-
-
-
 
 
 app.listen(PORT, function(err){

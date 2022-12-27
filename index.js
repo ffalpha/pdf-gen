@@ -74,7 +74,7 @@ app.get('/course/:id', (req, res) => {
                                 headerTemplate: '<header style=" border-bottom: 1px solid #000;font-size:9px ; width:100%">'
                                     + '<div style=" display: flex;flex-direction: row;flex-wrap: wrap; width: 100%;">'
                                     + ' <div style=" display: flex;flex-direction: column;flex-basis: 100%;  flex: 1;">'
-                                    + '    <div  style="font-size: 8px; color: rgb(50, 70, 247);padding-bottom: 1em;padding-left: 1em;">'
+                                    + '    <div  style="font-size: 12px; color: rgb(50, 70, 247);padding-bottom: 1em;padding-left: 1em;">'
                                     + '        Level 1, The Horizon Tower 3, Avenue 7<br>'
                                     + '         No 8, Jalan Kerinchi, Bangsar South City 59200<br>'
                                     + '        Federal Territory Kuala Lumpur, Malaysia<br>'
@@ -97,6 +97,18 @@ app.get('/course/:id', (req, res) => {
                             }).then(() => {
                                 const file = `./pdfs/${varaible}.pdf`;
                                 res.status(200).download(file);
+                            }).then(()=>{
+                                fs.unlink(`./pdfs/${varaible}.pdf`, function (err) {
+                                    if (err && err.code == 'ENOENT') {
+                                        // file doens't exist
+                                        console.info("File doesn't exist, won't remove it.");
+                                    } else if (err) {
+                                        // other errors, e.g. maybe we don't have enough permission
+                                        console.error("Error occurred while trying to remove file");
+                                    } else {
+                                        console.info(`removed pdf`);
+                                    }
+                                });
                             });
                             fs.unlink('./cd.json', function (err) {
                                 if (err && err.code == 'ENOENT') {

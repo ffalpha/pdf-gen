@@ -74,7 +74,7 @@ app.get('/course/:id', (req, res) => {
                                 headerTemplate: '<header style="  border-bottom: 1px solid #000;  width:100%">'
                                     + '<div style=" display: flex;flex-direction: row;flex-wrap: wrap; width: 100%;">'
                                     + ' <div style=" display: flex;flex-direction: column;flex-basis: 100%;  flex: 1;">'
-                                    + '    <div  style=" color: rgb(50, 70, 247);font-size: 13px;padding-bottom: 1em;padding-left: 1em;">'
+                                    + '    <div  style=" color: rgb(50, 70, 247);font-size: 11px;padding-bottom: 1em;padding-left: 1em;">'
                                     + '        Level 1, The Horizon Tower 3, Avenue 7<br>'
                                     + '         No 8, Jalan Kerinchi, Bangsar South City 59200<br>'
                                     + '        Federal Territory Kuala Lumpur, Malaysia<br>'

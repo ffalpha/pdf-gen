@@ -9,7 +9,7 @@ const app = require('express')();
 const PORT = process.env.PORT || 200;
 global.appRoot = path.resolve(__dirname);
 global.breakCounter = 0;
-global.counter = 1000;
+global.counter = 0;
 
 
 app.get('/hello',(req,res)=>{

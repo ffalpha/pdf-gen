@@ -8,7 +8,7 @@ const app = require('express')();
 const PORT =  8081;
 global.appRoot = path.resolve(__dirname);
 
-app.listen(PORT, () => console.log(`it is alive ${PORT}`));
+
 
 app.get('/hello',(req,res)=>{
     console.log("Hit here");
@@ -208,7 +208,10 @@ hbs.registerHelper("sub", function (index) {
 
 
 
-
+app.listen(PORT, function(err){
+    if (err) console.log(err);
+    console.log("Server listening on PORT", PORT);
+}); 
 
 
 

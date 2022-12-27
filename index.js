@@ -67,14 +67,14 @@ app.get('/course/:id', (req, res) => {
                             const headerTemplate = `<span style="font-size: 30px; width: 200px; height: 200px; background-color: black; color: white; margin: 20px;">Header</span>`;
                             const content = await compile('index', data);
                             await page.setContent(content);
-                            await page.addStyleTag({ path: 'index.css' })
+                            await page.addStyleTag({ path: './template/index.css' })
                             await page.emulateMediaType('print');
                             await page.pdf({
 
                                 path: `./pdfs/${varaible}.pdf`,
                                 format: 'A4',
                                 displayHeaderFooter: true,
-                                headerTemplate: '<header style="  border-bottom: 1px solid #000;  width:100%">'
+                                headerTemplate: '<header style="  border-bottom: 1px solid #000;  width:100%;font-size: 1.875em;">'
                                     + '<div style=" display: flex;flex-direction: row;flex-wrap: wrap; width: 100%;">'
                                     + ' <div style=" display: flex;flex-direction: column;flex-basis: 100%;  flex: 1;">'
                                     + '    <div  style=" color: rgb(50, 70, 247);font-size: 13px;padding-bottom: 1em;padding-left: 1em;">'
@@ -113,7 +113,7 @@ app.get('/course/:id', (req, res) => {
                             console.log('done');
                             await browser.close();
                            // process.exit();
-                            res.status(200).send("Message:PDF genrated");
+                          //  res.status(200).send("Message:PDF genrated");
 
 
                         } catch (error) {
@@ -135,12 +135,12 @@ app.get('/course/:id', (req, res) => {
             console.log(error);
         }
     })();
-    // setTimeout(() => {
-    //     const file = `./pdfs/${varaible}.pdf`;
-    //     res.status(200).download(file);
+    setTimeout(() => {
+        const file = `./pdfs/${varaible}.pdf`;
+        res.status(200).download(file);
         
-    //     console.log("File send");
-    // }, 8000);
+        console.log("File send");
+    }, 8000);
 })
 
 app.get('/courseget/:id', (req, res) => {

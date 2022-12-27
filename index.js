@@ -96,20 +96,22 @@ app.get('/course/:id', (req, res) => {
 
 
                             }).then(() => {
+                                fs.unlink('./cd.json', function (err) {
+                                    if (err && err.code == 'ENOENT') {
+                                        // file doens't exist
+                                        console.info("File doesn't exist, won't remove it.");
+                                    } else if (err) {
+                                        // other errors, e.g. maybe we don't have enough permission
+                                        console.error("Error occurred while trying to remove file");
+                                    } else {
+                                        console.info(`removed`);
+                                    }
+                                });
+
                                 const file = `./pdfs/${varaible}.pdf`;
                                 res.status(200).download(file);
                             })
-                            fs.unlink('./cd.json', function (err) {
-                                if (err && err.code == 'ENOENT') {
-                                    // file doens't exist
-                                    console.info("File doesn't exist, won't remove it.");
-                                } else if (err) {
-                                    // other errors, e.g. maybe we don't have enough permission
-                                    console.error("Error occurred while trying to remove file");
-                                } else {
-                                    console.info(`removed`);
-                                }
-                            });
+                        
 
                             console.log('done');
 

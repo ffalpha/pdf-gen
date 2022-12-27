@@ -5,7 +5,7 @@ const axios = require('axios');
 const hbs = require('handlebars');
 const path = require('path');
 const app = require('express')();
-const PORT =  8081;
+const PORT = process.env.PORT || 8081;
 global.appRoot = path.resolve(__dirname);
 
 
@@ -208,11 +208,11 @@ hbs.registerHelper("sub", function (index) {
 
 
 
+
 app.listen(PORT, function(err){
     if (err) console.log(err);
     console.log("Server listening on PORT", PORT);
 }); 
-
 
 
 

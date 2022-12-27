@@ -16,10 +16,8 @@ app.listen(
     PORT, () => console.log(`it is alive ${PORT}`))
 
 
-
 app.get('/course/:id', (req, res) => {
     console.log("hit");
-
     var varaible = req.params['id'];
     console.log(varaible);
 

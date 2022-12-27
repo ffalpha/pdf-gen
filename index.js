@@ -5,7 +5,7 @@ const axios = require('axios');
 const hbs = require('handlebars');
 const path = require('path');
 const app = require('express')();
-const PORT = process.env.PORT || 8082;
+const PORT =  8081;
 global.appRoot = path.resolve(__dirname);
 
 app.listen(
@@ -26,7 +26,7 @@ app.get('/course/:id', (req, res) => {
         },
     };
 
-    // Add Your Key Here!!!
+
     axios.defaults.headers.common = {
         "accept": "application/json, text/plain, */*",
         "accept-language": "en-GB,en-US;q=0.9,en;q=0.8",

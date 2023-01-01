@@ -6,10 +6,10 @@ const hbs = require('handlebars');
 const fsExtra = require('fs-extra');
 const path = require('path');
 const app = require('express')();
-const PORT = process.env.PORT || 200;
+const PORT = process.env.PORT || 3000;
 global.appRoot = path.resolve(__dirname);
 global.breakCounter = 0;
-global.counter = 0;
+global.counter = 999;
 
 
 app.get('/hello',(req,res)=>{
@@ -213,6 +213,11 @@ hbs.registerHelper("counter", function () {
 hbs.registerHelper("sub", function (index) {
     return index - breakCounter;
 });
+
+hbs.registerHelper("multi", function (moduleC) {
+    return 45 * moduleC;
+});
+
 
 
 if(counter !=1000){

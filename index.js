@@ -9,7 +9,7 @@ const app = require('express')();
 const PORT = process.env.PORT || 3000;
 global.appRoot = path.resolve(__dirname);
 global.breakCounter = 0;
-global.counter = 999;
+global.counter = 0;
 
 
 app.get('/hello',(req,res)=>{
@@ -121,7 +121,6 @@ app.get('/course/:id', (req, res) => {
                            
 
                             console.log('done');
-
                             await browser.close();
                             //process.exit();
 
@@ -215,6 +214,8 @@ hbs.registerHelper("sub", function (index) {
 });
 
 hbs.registerHelper("multi", function (moduleC) {
+    console.log(moduleC);
+    console.log( 45 * moduleC);
     return 45 * moduleC;
 });
 
